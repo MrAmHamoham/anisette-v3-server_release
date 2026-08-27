@@ -22,10 +22,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y ca-certificates ldc git clang dub libz-dev libssl-dev
 
-      - name: Build static binary
+      - name: Build static binary with static OpenSSL
         run: |
-          DC=ldc2 dub build -c "static" --build-mode allAtOnce -b release --compiler=ldc2
+          DC=ldc2 dub build -c "static" --build-mode allAtOnce -b release --compiler=ldc2 --config=static
           mv anisette-v3-server anisette-v3-server-linux-x86_64
+
 
       - name: Create GitHub Release and Upload Binary
         uses: softprops/action-gh-release@v2
